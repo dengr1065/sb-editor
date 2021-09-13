@@ -1,0 +1,20 @@
+{
+    "name": "sb-editor",
+    "version": "1.0.0",
+    "description": "An extension to ShapeBot for advanced functionality.",
+    "main": "src/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dengr1065/sb-editor.git"
+    },
+    "author": "dengr1065",
+    "license": "GPL-3.0-or-later",
+    "private": true,
+    "dependencies": {
+        "canvas": "^2.8.0",
+        "crc": "^3.8.0",
+        "discord.js": "^13.1.0",
+        "lz-string": "^1.4.4",
+        "node-fetch": "^2.6.1"
+    }
+}
