@@ -85,8 +85,13 @@ async function execute(msg) {
     }
 
     const image = renderShapes(shapes);
+    let filename = `shapes.png`;
+    if (msg.content.endsWith("/spoiler")) {
+        filename = "SPOILER_" + filename;
+    }
+
     await msg.channel.send({
-        files: [new MessageAttachment(image, "shapes.png")]
+        files: [new MessageAttachment(image, filename)]
     });
 }
 
