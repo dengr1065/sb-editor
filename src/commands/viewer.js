@@ -2,8 +2,8 @@ const { createCanvas } = require("canvas");
 const { MessageAttachment } = require("discord.js");
 const { viewerAccessRoles } = require("../../config.json");
 const { handleInstruction } = require("../instruction_viewer");
-const { toShortKey } = require("../viewer/shape");
 const { renderShape } = require("../viewer/viewer");
+const { enumLevelsToShape } = require("../viewer/enums");
 
 /**
  * Extracts shape definitions and modifiers from messages.
@@ -25,7 +25,17 @@ function extractShapes(message) {
 
         const instruction = part.slice(0, endIndex);
         const flags = instruction.split("+");
-        const shortKey = flags.shift();
+        let shortKey = flags.shift();
+
+        if (shortKey.startsWith("level")) {
+            const levelString = shortKey.substring(5);
+            try {
+                const level = Number(levelString);
+                shortKey = enumLevelsToShape[level];
+            } catch (error) {
+                continue;
+            }
+        }
 
         if (flags.length > 10) {
             throw new Error("Limit of modifiers reached");

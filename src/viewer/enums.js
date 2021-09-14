@@ -82,6 +82,36 @@ for (const key in enumColorToShortcode) {
     enumShortcodeToColor[enumColorToShortcode[key]] = key;
 }
 
+/** @enum {string} */
+const enumLevelsToShape = {
+    1: "CuCuCuCu",
+    2: "----CuCu",
+    3: "RuRuRuRu",
+    4: "RuRu----",
+    5: "Cu----Cu",
+    6: "Cu------",
+    7: "CrCrCrCr",
+    8: "RbRb----",
+    9: "CpCpCpCp",
+    10: "ScScScSc",
+    11: "CgScScCg",
+    12: "CbCbCbRb:CwCwCwCw",
+    13: "RpRpRpRp:CwCwCwCw",
+    14: "--Cg----:--Cr----",
+    15: "SrSrSrSr:CyCyCyCy",
+    16: "SrSrSrSr:CyCyCyCy:SwSwSwSw",
+    17: "CbRbRbCb:CwCwCwCw:WbWbWbWb",
+    18: "Sg----Sg:CgCgCgCg:--CyCy--",
+    19: "CpRpCp--:SwSwSwSw",
+    20: "RuCw--Cw:----Ru--",
+    21: "CrCwCrCw:CwCrCwCr:CrCwCrCw:CwCrCwCr",
+    22: "Cg----Cr:Cw----Cw:Sy------:Cy----Cy",
+    23: "CcSyCcSy:SyCcSyCc:CcSyCcSy",
+    24: "CcRcCcRc:RwCwRwCw:Sr--Sw--:CyCyCyCy",
+    25: "Rg--Rg--:CwRwCwRw:--Rg--Rg",
+    26: "CbCuCbCu:Sr------:--CrSrCr:CwCwCwCw"
+};
+
 module.exports = {
     enumSubShape,
     enumSubShapeToShortcode,
@@ -90,5 +120,6 @@ module.exports = {
     enumColors,
     enumColorToShortcode,
     enumColorsToHexCode,
-    enumShortcodeToColor
+    enumShortcodeToColor,
+    enumLevelsToShape
 };
