@@ -1,9 +1,10 @@
-const { fromShortKey, toShortKey } = require("./viewer/shape");
+const { fromShortKey, toShortKey, filterQuads } = require("./viewer/shape");
 
 const modifiers = {
     rot: doRot,
     rot_ccw: doRotCcw,
     cut: doCut,
+    qcut: doQCut,
     struct: doStruct,
     fill: doFill,
     layers: doLayers
@@ -41,21 +42,23 @@ function doRotCcw(input) {
 function doCut(input) {
     const shape = fromShortKey(input);
 
-    const dstLeft = [];
-    const dstRight = [];
-    for (const layer of shape) {
-        const left = [null, null, layer[2], layer[3]];
-        const right = [layer[0], layer[1], null, null];
+    const result = [filterQuads(shape, [2, 3]), filterQuads(shape, [0, 1])];
+    return result.filter((shape) => shape != null).map(toShortKey);
+}
 
-        if (left[2] || left[3]) {
-            dstLeft.push(left);
-        }
-        if (right[0] || right[1]) {
-            dstRight.push(right);
-        }
-    }
+/**
+ * @param {string} input
+ */
+function doQCut(input) {
+    const shape = fromShortKey(input);
 
-    return [toShortKey(dstLeft), toShortKey(dstRight)];
+    const result = [
+        filterQuads(shape, [0]),
+        filterQuads(shape, [1]),
+        filterQuads(shape, [2]),
+        filterQuads(shape, [3])
+    ];
+    return result.filter((shape) => shape != null).map(toShortKey);
 }
 
 /**

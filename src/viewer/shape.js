@@ -89,6 +89,27 @@ function toShortKey(shape) {
     return key;
 }
 
+function filterQuads(shape, indexes) {
+    const newShape = [];
+    for (const layer of shape) {
+        const newLayer = [null, null, null, null];
+        for (let i = 0; i < layer.length; i++) {
+            if (indexes.includes(i)) {
+                newLayer[i] = layer[i];
+            }
+        }
+
+        if (newLayer.some((quad) => !!quad)) {
+            newShape.push(newLayer);
+        }
+    }
+
+    if (newShape.length == 0) {
+        return undefined;
+    }
+    return newShape;
+}
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
@@ -134,4 +155,10 @@ function randomShape() {
     return fromShortKey(code);
 }
 
-module.exports = { fromShortKey, toShortKey, randomShape, layerRegex };
+module.exports = {
+    fromShortKey,
+    toShortKey,
+    filterQuads,
+    randomShape,
+    layerRegex
+};

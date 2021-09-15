@@ -28,6 +28,9 @@ compiler may be required._
 -   `apiToken`: Token for shapez.io API, required to access puzzles.
 -   `puzzleWatchlist`: List of channel IDs to automatically run sbe:puzzle in.
 -   `viewerAccessRoles`: List of role IDs permitted to use shape viewer.
+-   `antiSpamEnabled`: Controls automatic spam detection.
+-   `antiSpamRole`: If automatic spam detection is enabled, specify a role ID
+    to assign here.
 
 ---
 
