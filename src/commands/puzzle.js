@@ -121,7 +121,7 @@ async function execute(msg) {
     embed.setImage("attachment://field.png");
 
     const thumbnail = shapesCache[key].toBuffer("image/png");
-    const puzzleField = await renderPuzzle(game, shapesCache);
+    const puzzleField = await renderPuzzle(puzzle.game, shapesCache);
 
     await msg.channel.send({
         embeds: [embed],
