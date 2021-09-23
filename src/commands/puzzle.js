@@ -29,69 +29,99 @@ for (const building in buildingToEmoji) {
 }
 
 /**
+ * Prepares data to display in embeds.
+ * @param {{
+ *     game: import("../typings").PuzzleGameData,
+ *     meta: import("../typings").PuzzleMetaData
+ * }} puzzle
+ */
+function formatData({ game, meta }) {
+    const { w, h } = game.bounds;
+
+    const descriptionPrefix = {
+        [undefined]: "A",
+        easy: "Easy",
+        medium: "Medium",
+        hard: "Hard"
+    }[difficultyFromValue(meta.difficulty)];
+
+    const time = meta.averageTime
+        ? formatPuzzleTime(meta.averageTime)
+        : undefined;
+
+    const finishRate = meta.completions / meta.downloads;
+    const showRate = !isNaN(finishRate);
+
+    const buildings = { ...buildingToEmoji };
+    const excluded = game.excludedBuildings || [];
+
+    for (const building of excluded) {
+        delete buildings[building];
+    }
+
+    return {
+        title: meta.title,
+        description: `${descriptionPrefix} puzzle by ${meta.author}`,
+        size: `${w}x${h}`,
+        downloads: meta.downloads,
+        completions: meta.completions,
+        averageTime: time,
+        completionRate: showRate ? Math.round(finishRate * 100) : undefined,
+        buildings: buildings.join(" "),
+        likes: meta.likes
+    };
+}
+
+/**
  * @param {import("discord.js").Message} msg
  */
 async function execute(msg) {
     const slice = msg.content.startsWith("sbe:puzzle") ? 1 : 0;
     const key = msg.content.split(/\s+/).slice(slice)[0];
 
-    const { game, meta } = await fetchPuzzle(key);
-
-    const { list: reports } = await puzzleReports(key);
-    const reportsLine = reports.length ? `\n${reports.length} report(s)` : "";
-
-    if (!meta.completed) {
-        meta.downloads--;
+    const puzzle = await fetchPuzzle(key);
+    if (!puzzle.meta.completed) {
+        // Ignore download by the bot
+        puzzle.meta.downloads--;
     }
 
-    const buildings = { ...buildingToEmoji };
-    const excludedBuildings = game.excludedBuildings;
-
-    if (excludedBuildings != undefined) {
-        for (const building of excludedBuildings) {
-            delete buildings[building];
-        }
-    }
-
-    const bounds = `${game.bounds.w}x${game.bounds.h}`;
-    const downloads = `${meta.downloads} (\\👍 ${meta.likes})`;
-
-    const difficultyId = difficultyFromValue(meta.difficulty);
-    const difficulty = difficultyId
-        ? `${difficultyId[0].toUpperCase()}${difficultyId.split(1)}`
-        : "A";
-
-    const completionRate = Math.round(
-        (meta.completions / meta.downloads) * 100
-    );
-    const completions = isNaN(completionRate)
-        ? meta.completions
-        : `${meta.completions} (${completionRate}%)`;
-
+    const data = formatData(puzzle);
     const embed = new MessageEmbed();
-    embed.setAuthor(`${difficulty} puzzle by ${meta.author}`);
-    embed.setTitle(`${meta.title} (${bounds})`);
-    embed.setDescription(Object.values(buildings).join(" ") + reportsLine);
+    embed.setAuthor(data.description);
+    embed.setTitle(`${data.title} (${data.size})`);
     embed.setFooter(
         `${msg.member.displayName} • Key: ${key}`,
         msg.author.displayAvatarURL({ size: 64 })
     );
 
+    // Display allowed buildings and reports (if any)
+    const { list: reports } = await puzzleReports(key);
+    const reportsLine = reports.length ? `\n${reports.length} report(s)` : "";
+    embed.setDescription(data.buildings + reportsLine);
+
+    // Downloads & likes
+    const downloads = `${data.downloads} (\\👍 ${data.likes})`;
     embed.addField("Downloads", downloads, true);
+
+    // Completions and rate (if possible to calculate)
+    const completions = data.completionRate
+        ? `${data.completions} (${data.completionRate}%)`
+        : data.completions;
     embed.addField("Completions", completions, true);
-    if (meta.averageTime) {
-        embed.addField("Avg. time", formatPuzzleTime(meta.averageTime), true);
+
+    if (data.averageTime) {
+        embed.addField("Avg. time", data.averageTime, true);
     }
 
     /** @type {{[key: string]: import("canvas").Canvas}} */
     const shapesCache = {};
     shapesCache[key] = renderShape(key, 64);
 
-    const thumbnail = shapesCache[key].toBuffer("image/png");
     embed.setThumbnail("attachment://shape.png");
-
-    const puzzleField = await renderPuzzle(game, shapesCache);
     embed.setImage("attachment://field.png");
+
+    const thumbnail = shapesCache[key].toBuffer("image/png");
+    const puzzleField = await renderPuzzle(game, shapesCache);
 
     await msg.channel.send({
         embeds: [embed],
