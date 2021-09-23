@@ -67,7 +67,7 @@ function formatData({ game, meta }) {
         completions: meta.completions,
         averageTime: time,
         completionRate: showRate ? Math.round(finishRate * 100) : undefined,
-        buildings: buildings.join(" "),
+        buildings: Object.values(buildings).join(" "),
         likes: meta.likes
     };
 }
