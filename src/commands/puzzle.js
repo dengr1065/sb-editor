@@ -106,7 +106,7 @@ async function execute(msg) {
     // Completions and rate (if possible to calculate)
     const completions = data.completionRate
         ? `${data.completions} (${data.completionRate}%)`
-        : data.completions;
+        : data.completions.toString();
     embed.addField("Completions", completions, true);
 
     if (data.averageTime) {
