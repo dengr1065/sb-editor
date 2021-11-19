@@ -51,9 +51,9 @@ function extractShapes(message) {
  * Renders all provided shapes to a canvas, and exports
  * it to a PNG buffer.
  * @param {string[]} shapes
+ * @param {number} shapeSize
  */
-function renderShapes(shapes) {
-    const shapeSize = 56;
+function renderShapes(shapes, shapeSize = 56) {
     const columnsCount = Math.min(shapes.length, 8);
     const rowsCount = Math.ceil(shapes.length / columnsCount);
 
@@ -94,7 +94,14 @@ async function execute(msg) {
         return;
     }
 
-    const image = renderShapes(shapes);
+    // regex sux
+    let shapeSize = 56;
+    if (msg.content.includes("/size:")) {
+        shapeSize = parseInt(msg.content.split("/size:")[1], 10) || shapeSize;
+        shapeSize = Math.max(16, Math.min(192, shapeSize));
+    }
+
+    const image = renderShapes(shapes, shapeSize);
     let filename = `shapes.png`;
     if (msg.content.endsWith("/spoiler")) {
         filename = "SPOILER_" + filename;
