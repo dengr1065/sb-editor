@@ -10,5 +10,12 @@
         "706121937713365082"
     ],
     "antiSpamEnabled": true,
-    "antiSpamRole": "839642361298681876"
+    "antiSpamRole": "839642361298681876",
+    "upvotePinEnabled": true,
+    "upvoteThreshold": 5,
+    "upvoteEmojis": ["776486324974649354"],
+    "upvoteWatchlist": [
+        "761128571984674816",
+        "706391702067347456"
+    ]
 }
