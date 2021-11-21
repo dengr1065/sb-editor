@@ -16,10 +16,7 @@ async function execute(msg) {
 
 /**
  * Pins messages with enough upvotes.
- * @param {(
- *     import("discord.js").PartialMessageReaction |
- *     import("discord.js").MessageReaction
- * )} preact
+ * @param {import("discord.js").PartialMessageReaction} preact
  */
 async function watcher(preact) {
     // trust me on these partials
@@ -27,21 +24,16 @@ async function watcher(preact) {
     if (!upvoteEmojis.includes(code)) return;
     if (!upvoteWatchlist.includes(preact.message.channel.id)) return;
 
-    if (preact.partial) {
-        try {
-            await preact.fetch();
-        } catch {
-            // message probably deleted
-            return;
+    try {
+        const react = await preact.fetch();
+        if (react.count < upvoteThreshold) return;
+
+        const message = await react.message.fetch();
+        if (!message.pinned) {
+            await message.pin();
         }
-    }
-    /** @type {import("discord.js").MessageReaction} */
-    const react = preact;
-
-    if (react.count < upvoteThreshold) return;
-
-    if (!react.message.pinned) {
-        react.message.pin();
+    } catch {
+        /* failed to fetch or pin */
     }
 }
 
