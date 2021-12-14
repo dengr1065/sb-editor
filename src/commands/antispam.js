@@ -1,4 +1,4 @@
-const { antiSpamEnabled, antiSpamRole } = require("../../config.json");
+const { antiSpamRole } = require("../../config.json");
 
 const lastMessages = {};
 
@@ -67,12 +67,12 @@ module.exports = {
     name: "sbe:antispam",
     execute,
     load: (client) => {
-        if (antiSpamEnabled) {
+        if (antiSpamRole) {
             client.on("messageCreate", watcher);
         }
     },
     unload: (client) => {
-        if (antiSpamEnabled) {
+        if (antiSpamRole) {
             client.off("messageCreate", watcher);
         }
     }

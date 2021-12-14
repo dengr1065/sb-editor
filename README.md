@@ -21,16 +21,21 @@ compiler may be required._
 -   `sbe:puzzle <key>`: Display a puzzle using the short key.
 -   `sbe:reports <key/username>`: View reports for a puzzle or by username.
 -   `sbe:puzzlesearch [search terms]`: Search the puzzle collection.
+-   `sbe:msg [message]`: Send a message from messages/ directory by its' name.
 
 ## Configuration
 
 -   `token`: Discord bot token, required to login.
 -   `apiToken`: Token for shapez.io API, required to access puzzles.
 -   `puzzleWatchlist`: List of channel IDs to automatically run sbe:puzzle in.
--   `viewerAccessRoles`: List of role IDs permitted to use shape viewer.
--   `antiSpamEnabled`: Controls automatic spam detection.
--   `antiSpamRole`: If automatic spam detection is enabled, specify a role ID
-    to assign here.
+-   `trustedRoles`: List of role IDs permitted to use instruction viewer and
+    quick messages.
+-   `antiSpamRole`: Role ID to assign when automatic spam detection triggers.
+    Value of empty string disables this behavior.
+-   `upvoteThreshold`: Amount of emoji required to pin a message. Set to 0
+    in order to disable pins.
+-   `upvoteEmojis`: List of emoji IDs required for a message to get pinned.
+-   `upvoteWatchlist`: List of channel IDs where messages will be pinned.
 
 ---
 

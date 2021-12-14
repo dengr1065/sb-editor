@@ -1,6 +1,6 @@
 const { createCanvas } = require("canvas");
 const { MessageAttachment } = require("discord.js");
-const { viewerAccessRoles } = require("../../config.json");
+const { trustedRoles } = require("../../config.json");
 const { handleInstruction } = require("../instruction_viewer");
 const { renderShape } = require("../viewer/viewer");
 const { enumLevelsToShape } = require("../viewer/enums");
@@ -84,7 +84,7 @@ async function execute(msg) {
     }
 
     const callerRoles = msg.member.roles.cache;
-    if (!callerRoles.some((role) => viewerAccessRoles.includes(role.id))) {
+    if (!callerRoles.some((role) => trustedRoles.includes(role.id))) {
         // Ignore users who cannot use the viewer
         return;
     }

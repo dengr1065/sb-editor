@@ -1,5 +1,4 @@
 const {
-    upvotePinEnabled,
     upvoteThreshold,
     upvoteEmojis,
     upvoteWatchlist
@@ -41,12 +40,12 @@ module.exports = {
     name: "sbe:upvotepin",
     execute,
     load: (client) => {
-        if (upvotePinEnabled) {
+        if (upvoteThreshold > 0) {
             client.on("messageReactionAdd", watcher);
         }
     },
     unload: (client) => {
-        if (upvotePinEnabled) {
+        if (upvoteThreshold > 0) {
             client.off("messageReactionAdd", watcher);
         }
     }
