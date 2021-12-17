@@ -1,0 +1,1 @@
+**Double painters** have a known **bug regarding output speed**; they push out items *slightly slower* than the description says. The workaround is to just build 1 more than expected. At equal upgrades, this means 4 **+ 1 = 5** painters for a single belt or 8 **+ 1 = 9** for a dual belt.
