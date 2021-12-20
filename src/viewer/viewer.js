@@ -30,13 +30,59 @@ function radians(degrees) {
 }
 
 /**
+ * @param {import("canvas").NodeCanvasRenderingContext2D} ctx
+ * @param {string} message
+ */
+function renderWarning(ctx, message) {
+    const font = "400 16px monospace";
+
+    ctx.font = font;
+    const charWidth = ctx.measureText("w").width;
+
+    const width = ctx.canvas.width;
+    const height = ctx.canvas.height;
+
+    const wSize = Math.ceil(Math.sqrt(message.length));
+    const warning = createCanvas(
+        (wSize + 1) * charWidth,
+        (wSize + 1) * charWidth * 1.2
+    );
+    const wCtx = warning.getContext("2d");
+
+    wCtx.font = font;
+    wCtx.textAlign = "center";
+    wCtx.textBaseline = "top";
+    wCtx.fillStyle = "white";
+
+    while (message.length > 0) {
+        const length = Math.min(wSize, message.length);
+        const line = message.slice(0, length);
+        message = message.slice(length);
+
+        wCtx.fillText(line.trim(), warning.width / 2, 0);
+        wCtx.translate(0, charWidth * 1.2);
+    }
+
+    ctx.drawImage(warning, 0, 0, width, height);
+}
+
+/**
  * @param {string} code
  * @param {number} s
  */
 function renderShape(code, s) {
-    const layers = fromShortKey(code);
     const canvas = createCanvas(s, s);
     const context = canvas.getContext("2d");
+    let layers;
+
+    try {
+        layers = fromShortKey(code);
+    } catch (err) {
+        // Most likely, this can be simplified, but
+        // who cares if it works
+        renderWarning(context, err.message);
+        return canvas;
+    }
 
     context.translate(s / 2, s / 2);
     context.scale(s / 28, s / 28);
@@ -136,7 +182,7 @@ function renderShape(code, s) {
                 }
 
                 default: {
-                    assertAlways(false, "Unkown sub shape: " + subShape);
+                    throw new Error("Unkown sub shape: " + subShape);
                 }
             }
 

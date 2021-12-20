@@ -10,6 +10,8 @@ const modifiers = {
     layers: doLayers
 };
 
+const fillRegex = /[A-Z](?![a-z])/g;
+
 /**
  * @param {string} input
  */
@@ -91,7 +93,9 @@ function doStruct(input) {
  * @param {string} input
  */
 function doFill(input) {
-    const srcLayers = input.split(":");
+    const srcLayers = input
+        .split(":")
+        .map((l) => l.replace(fillRegex, "$&u").replace(/-u/g, "--"));
     const dstLayers = [];
 
     for (const layer of srcLayers) {
@@ -127,11 +131,7 @@ function handleInstruction(shortKey, flags) {
         const modifier = flags.shift();
         const result = [];
         for (const instruction of modifiers[modifier](shortKey)) {
-            if (flags.length > 0) {
-                result.push(...handleInstruction(instruction, [...flags]));
-            } else {
-                result.push(instruction);
-            }
+            result.push(...handleInstruction(instruction, [...flags]));
         }
 
         return result;

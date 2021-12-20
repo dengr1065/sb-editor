@@ -20,41 +20,38 @@ const layerRegex = new RegExp(
 function fromShortKey(key) {
     const sourceLayers = key.split(":");
     if (sourceLayers.length > maxLayer) {
-        throw new Error("Only " + maxLayer + " layers allowed");
+        throw new Error("excess layers");
     }
 
     const layers = [];
     for (let i = 0; i < sourceLayers.length; ++i) {
         const text = sourceLayers[i];
         if (text.length !== 8) {
-            throw new Error(
-                "Invalid layer: '" + text + "' -> must be 8 characters"
-            );
+            throw new Error(text + "is not filled");
         }
 
         if (text === "--".repeat(4)) {
-            throw new Error("Empty layers are not allowed");
-        }
-
-        if (!layerRegex.test(text)) {
-            throw new Error("Invalid syntax in layer " + (i + 1));
+            throw new Error("empty layer " + (i + 1));
         }
 
         const quads = [null, null, null, null];
         for (let quad = 0; quad < 4; ++quad) {
             const shapeText = text[quad * 2 + 0];
             const subShape = enumShortcodeToSubShape[shapeText];
-            const color = enumShortcodeToColor[text[quad * 2 + 1]];
+            const colorText = text[quad * 2 + 1];
+            const color = enumShortcodeToColor[colorText];
+
             if (subShape) {
                 if (!color) {
-                    throw new Error("Invalid shape color key: " + key);
+                    throw new Error("invalid color " + colorText);
                 }
 
                 quads[quad] = { subShape, color };
             } else if (shapeText !== "-") {
-                throw new Error("Invalid shape key: " + shapeText);
+                throw new Error("invalid shape " + shapeText);
             }
         }
+
         layers.push(quads);
     }
 

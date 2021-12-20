@@ -2,8 +2,8 @@ const { readdir, readFile } = require("fs/promises");
 const { trustedRoles } = require("../../config.json");
 
 const NEW_LINK =
-    "[submit a pull request](https://github.com/dengr1065" +
-    "/sb-editor/tree/master/messages)";
+    "submit a pull request: <https://github.com/dengr1065" +
+    "/sb-editor/tree/master/messages>";
 const messages = {};
 
 /**
