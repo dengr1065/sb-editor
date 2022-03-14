@@ -18,12 +18,18 @@ function extractShapes(message) {
     }
 
     for (const part of parts) {
-        const endIndex = part.indexOf("}");
+        let startIndex = 0;
+        let endIndex = part.indexOf("}");
         if (endIndex == -1) {
             continue;
         }
 
-        const instruction = part.slice(0, endIndex);
+        if (part[0] == "`" && part[endIndex - 1] == "`") {
+            startIndex = 1;
+            endIndex -= 1;
+        }
+
+        const instruction = part.slice(startIndex, endIndex);
         const flags = instruction.split("+");
         let shortKey = flags.shift();
 
