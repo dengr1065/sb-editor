@@ -38,9 +38,17 @@ async function watcher(msg) {
             const messages = lastMessages[id].objects;
             lastMessages[id].objects = [];
 
-            // Mute the person
-            if (msg.member.manageable) {
-                await msg.member.roles.add(antiSpamRole);
+            // Timeout the person
+            if (
+                msg.member.moderatable &&
+                !msg.member.isCommunicationDisabled()
+            ) {
+                /**
+                 * broken typings
+                 * @type {import("discord.js").GuildMember}
+                 */
+                const member = msg.member;
+                await member.timeout(36e5, "antispam: " + msg.content);
             }
 
             // Delete everything
