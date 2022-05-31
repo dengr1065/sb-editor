@@ -32,6 +32,7 @@ async function getRawMod(query = undefined) {
         // Sort exact matches to be first
         return nameB.includes(search) - nameA.includes(search);
     });
+
     return response.data.data[0];
 }
 
@@ -83,7 +84,7 @@ class Mod {
         return new Date(this.raw.date_updated);
     }
 
-    /** @returns {string} */
+    /** @returns {string?} */
     get thumbnailURL() {
         return this.raw.logo.thumb_320x180;
     }
@@ -100,6 +101,13 @@ class Mod {
         return this.raw.modfile.version;
     }
 
+    get installURL() {
+        return (
+            "shapeziomm://shapez-mod.entibo.workers.dev/info/" +
+            encodeURIComponent(this.raw.name_id)
+        );
+    }
+
     /** @returns {string} */
     get downloadURL() {
         return this.raw.modfile.download.binary_url;
@@ -110,12 +118,9 @@ class Mod {
         return this.raw.tags.map((tag) => tag.name);
     }
 
-    /** @returns {{ today: number, total: number }} */
+    /** @returns {number?} */
     get downloads() {
-        return {
-            today: this.raw.stats.downloads_today,
-            total: this.raw.stats.downloads_total
-        };
+        return this.raw.stats.downloads_total;
     }
 }
 

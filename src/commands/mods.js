@@ -27,21 +27,25 @@ async function execute(msg) {
     embed.setTitle(mod.name);
     embed.setURL(mod.url);
     embed.setDescription(mod.summary);
-    embed.setThumbnail(mod.thumbnailURL);
     embed.setFooter({
         text: "Submitted by " + mod.submitter.name,
         iconURL: mod.submitter.avatarURL
     });
 
-    embed.addField("Tags", mod.tags.join(", "));
+    if (mod.tags.length > 0) {
+        embed.addField("Tags", mod.tags.join(", "));
+    }
+
     embed.addField("Version", mod.currentVersion, true);
-    embed.addField(
-        "Downloads",
-        `${mod.downloads.total} (${mod.downloads.today} today)`,
-        true
-    );
+    if (mod.downloads != undefined) {
+        embed.addField("Downloads", mod.downloads.toString(), true);
+    }
     embed.addField("Updated", `<t:${mod.updateDate.getTime()}:R>`, true);
 
+    // ShapezLauncher install link (yes, it's big!)
+    embed.addField("Install with ShapezLauncher", `<${mod.installURL}>`);
+
+    mod.thumbnailURL && embed.setThumbnail(mod.thumbnailURL);
     if (mod.images.length > 0) {
         embed.setImage(mod.images[0]);
     }
