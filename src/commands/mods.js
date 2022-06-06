@@ -36,7 +36,7 @@ async function execute(msg) {
         embed.addField("Tags", mod.tags.join(", "));
     }
 
-    embed.addField("Version", mod.currentVersion, true);
+    embed.addField("Version", String(mod.currentVersion), true);
     if (mod.downloads != undefined) {
         embed.addField("Downloads", mod.downloads.toString(), true);
     }

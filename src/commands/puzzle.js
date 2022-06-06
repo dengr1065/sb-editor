@@ -87,7 +87,9 @@ async function execute(msg) {
 
     const data = formatData(puzzle);
     const embed = new MessageEmbed();
-    embed.setAuthor(data.description);
+    embed.setAuthor({
+        name: data.description
+    });
     embed.setTitle(`${data.title} (${data.size})`);
     embed.setFooter(
         `${msg.member.displayName} • Key: ${key}`,
