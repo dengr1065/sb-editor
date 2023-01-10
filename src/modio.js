@@ -4,7 +4,8 @@ const api = axios.create({
     baseURL: "https://api.mod.io/v1/games/@shapez",
     responseType: "json",
     headers: {
-        origin: "https://mod.io"
+        // mod.io devs are retarded
+        "X-Modio-Origin": "web"
     },
     transitional: {
         silentJSONParsing: false
