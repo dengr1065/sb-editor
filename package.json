@@ -1,0 +1,27 @@
+{
+    "name": "sb-editor",
+    "version": "2.0.0",
+    "description": "A Discord bot for servers centered around shapez",
+    "main": "dist/index.js",
+    "repository": "git@github.com:dengr1065/sb-editor.git",
+    "author": "Даниїл Григор'єв <dengr1065@gmail.com>",
+    "license": "GPL-3.0-or-later",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "start": "tsc && node ."
+    },
+    "dependencies": {
+        "@sapphire/framework": "^4.0.1",
+        "@types/node": "^18.11.18",
+        "ajv": "^8.12.0",
+        "discord.js": "14.x"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.48.1",
+        "@typescript-eslint/parser": "^5.48.1",
+        "eslint": "^8.31.0",
+        "typescript": "^4.9.4"
+    }
+}
