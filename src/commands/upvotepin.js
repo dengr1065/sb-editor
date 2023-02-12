@@ -28,11 +28,18 @@ async function watcher(preact) {
         if (react.count < upvoteThreshold) return;
 
         const message = await react.message.fetch();
+
+        if (message.attachments.size == 0) {
+            // The message has no attachments - not worth pinning
+            return;
+        }
+
         if (!message.pinned) {
             await message.pin();
         }
-    } catch {
+    } catch (err) {
         /* failed to fetch or pin */
+        console.warn("Failed to pin message:", err);
     }
 }
 

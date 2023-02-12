@@ -1,4 +1,4 @@
-const { CanvasRenderingContext2D, createCanvas } = require("canvas");
+const { createCanvas } = require("canvas");
 const {
     arrayQuadrantIndexToOffset,
     enumColorsToHexCode,
@@ -10,7 +10,7 @@ const quadrantSize = 10;
 const quadrantHalfSize = quadrantSize / 2;
 
 /**
- * @param {CanvasRenderingContext2D} ctx
+ * @param {import("canvas").CanvasRenderingContext2D} ctx
  * @param {number} x
  * @param {number} y
  * @param {number} r
