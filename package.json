@@ -17,5 +17,8 @@
         "discord.js": "^13.1.0",
         "lz-string": "^1.4.4",
         "node-fetch": "^2.6.1"
+    },
+    "devDependencies": {
+        "eslint": "^8.34.0"
     }
 }
