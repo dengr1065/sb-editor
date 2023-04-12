@@ -15,6 +15,13 @@ async function execute(msg) {
 
     if (fast) {
         file = msg.content.slice(1);
+    } else if (file.trim() === "") {
+        // No message specified, list all of them
+        const allMessages = Object.keys(messages).join("`, `");
+
+        const content = `Available messages: \`${allMessages}\`.`;
+        await msg.channel.send(content);
+        return;
     }
 
     const content = messages[file.toLowerCase()];
