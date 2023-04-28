@@ -30,8 +30,7 @@ compiler may be required._
 -   `puzzleWatchlist`: List of channel IDs to automatically run sbe:puzzle in.
 -   `trustedRoles`: List of role IDs permitted to use instruction viewer and
     quick messages.
--   `antiSpamRole`: Role ID to assign when automatic spam detection triggers.
-    Value of empty string disables this behavior.
+-   `antiSpamEnabled`: Enable or disable simple automated spam detection.
 -   `upvoteThreshold`: Amount of emoji required to pin a message. Set to 0
     in order to disable pins.
 -   `upvoteEmojis`: List of emoji IDs required for a message to get pinned.

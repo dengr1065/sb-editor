@@ -1,9 +1,7 @@
 {
     "token": "DISCORD_BOT_TOKEN",
     "apiToken": "SHAPEZ_IO_API_TOKEN",
-    "puzzleWatchlist": [
-        "838796405840805888"
-    ],
+    "puzzleWatchlist": ["838796405840805888"],
     "trustedRoles": [
         "869207333882957844",
         "712820017023942726",
@@ -11,13 +9,8 @@
         "706121754493321297",
         "706121937713365082"
     ],
-    "antiSpamRole": "839642361298681876",
+    "antiSpamEnabled": true,
     "upvoteThreshold": 5,
-    "upvoteEmojis": [
-        "776486324974649354"
-    ],
-    "upvoteWatchlist": [
-        "761128571984674816",
-        "706391702067347456"
-    ]
+    "upvoteEmojis": ["776486324974649354"],
+    "upvoteWatchlist": ["761128571984674816", "706391702067347456"]
 }
