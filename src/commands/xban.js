@@ -37,13 +37,13 @@ async function execute(msg) {
         }
     }
 
-    if (failedGuilds == allGuilds.size()) {
+    if (failedGuilds == allGuilds.size) {
         // Couldn't ban in any of the servers
         throw new Error('Missing "Ban Members" permission.');
     }
 
     const username = `\`${targetUser.username}\``;
-    const banCount = allGuilds.size() - failedGuilds;
+    const banCount = allGuilds.size - failedGuilds;
 
     await msg.reply(`Banned ${username} in ${banCount} servers.`);
 }
