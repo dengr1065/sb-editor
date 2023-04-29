@@ -104,7 +104,11 @@ client.on("messageCreate", async (msg) => {
     try {
         await cmd.execute(msg);
     } catch (err) {
-        await msg.reply("Execution failed: " + err.message);
+        const displayError =
+            process.env.NODE_ENV == "development"
+                ? err.toString()
+                : err.message;
+        await msg.reply("Execution failed: " + displayError);
     }
 });
 
