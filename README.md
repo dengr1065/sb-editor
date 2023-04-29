@@ -22,6 +22,7 @@ compiler may be required._
 -   `sbe:reports <key/username>`: View reports for a puzzle or by username.
 -   `sbe:puzzlesearch [search terms]`: Search the puzzle collection.
 -   `sbe:msg [message]`: Send a message from messages/ directory by its' name.
+-   `sbe:xban <reason>`: Ban a user in all servers where you have Ban Members permission.
 
 ## Configuration
 
