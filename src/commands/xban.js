@@ -15,9 +15,16 @@ async function execute(msg) {
 
     for (const [, guild] of allGuilds) {
         const botGuildMember = await guild.members.fetch(msg.client.user.id);
-        const moderator = await guild.members.fetch(moderatorUser.id);
-        const canBan = botGuildMember.permissions.has("BAN_MEMBERS", true);
+        const moderator = await guild.members
+            .fetch(moderatorUser.id)
+            .catch(() => null);
 
+        if (moderator === null) {
+            failedGuilds++;
+            continue;
+        }
+
+        const canBan = botGuildMember.permissions.has("BAN_MEMBERS", true);
         if (!canBan || !moderator.permissions.has("BAN_MEMBERS", true)) {
             failedGuilds++;
             continue;
