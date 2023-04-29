@@ -106,7 +106,7 @@ client.on("messageCreate", async (msg) => {
     } catch (err) {
         const displayError =
             process.env.NODE_ENV == "development"
-                ? err.toString()
+                ? err.stack ?? err.toString()
                 : err.message;
         await msg.reply("Execution failed: " + displayError);
     }
