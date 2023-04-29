@@ -35,6 +35,7 @@ compiler may be required._
     in order to disable pins.
 -   `upvoteEmojis`: List of emoji IDs required for a message to get pinned.
 -   `upvoteWatchlist`: List of channel IDs where messages will be pinned.
+-   `disabledCommands`: Disable specific commands for each server.
 
 ---
 
