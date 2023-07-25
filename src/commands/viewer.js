@@ -1,6 +1,6 @@
 const { createCanvas } = require("canvas");
 const { MessageAttachment } = require("discord.js");
-const { trustedRoles } = require("../../config.json");
+const { trustedRoles, disabledCommands } = require("../../config.json");
 const { handleInstruction } = require("../instruction_viewer");
 const { renderShape } = require("../viewer/viewer");
 const { enumLevelsToShape } = require("../viewer/enums");
@@ -125,6 +125,10 @@ async function execute(msg) {
 async function watcher(msg) {
     if (msg.author.bot) return;
     if (!msg.content.includes("{")) return;
+
+    if (disabledCommands[msg.guildId]?.includes("sbe:viewer")) {
+        return;
+    }
 
     try {
         await execute(msg);

@@ -7,20 +7,30 @@
         "712820017023942726",
         "732269299493896259",
         "706121754493321297",
-        "706121937713365082"
+        "706121937713365082",
+        "1000345864818151477",
+        "1001052720955916298",
+        "1032586948176523296",
+        "1032587072134991893",
+        "1032586869990506538",
+        "1024045869533769752",
+        "1068092441674129418"
     ],
     "antiSpamEnabled": true,
     "upvoteThreshold": 5,
     "upvoteEmojis": ["776486324974649354"],
     "upvoteWatchlist": ["761128571984674816", "706391702067347456"],
+    "shapez2ViewerPath": "/path/to/viewer/repo",
     "disabledCommands": {
+        "706121159405731910": ["sbe:s2viewer"],
         "1000343719314198548": [
             "sbe:compress",
             "sbe:decompress",
             "sbe:mods",
             "sbe:puzzle",
             "sbe:puzzlesearch",
-            "sbe:reports"
+            "sbe:reports",
+            "sbe:viewer"
         ]
     }
 }
