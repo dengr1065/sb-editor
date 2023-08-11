@@ -30,6 +30,10 @@ function extractShapes(message) {
         }
 
         const instruction = part.slice(startIndex, endIndex);
+        if (instruction.includes("\n")) {
+            continue;
+        }
+
         const flags = instruction.split("+");
         let shortKey = flags.shift();
 

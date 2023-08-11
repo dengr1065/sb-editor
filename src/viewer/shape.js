@@ -27,7 +27,7 @@ function fromShortKey(key) {
     for (let i = 0; i < sourceLayers.length; ++i) {
         const text = sourceLayers[i];
         if (text.length !== 8) {
-            throw new Error(text + "is not filled");
+            throw new Error(`layer ${i + 1} is not filled`);
         }
 
         if (text === "--".repeat(4)) {
