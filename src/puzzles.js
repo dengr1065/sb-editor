@@ -1,4 +1,4 @@
-const { loadImage, createCanvas, Image } = require("canvas");
+const { loadImage, createCanvas, Image } = require("@napi-rs/canvas");
 const { readFileSync } = require("fs");
 const { request } = require("./api");
 const { fromShortKey } = require("./viewer/shape");
@@ -37,7 +37,7 @@ function makeGrid(size) {
 
 /**
  * @param {import("./typings").PuzzleGameData} game
- * @param {{ [key: string]: import("canvas").Canvas }} shapes
+ * @param {{ [key: string]: import("@napi-rs/canvas").Canvas }} shapes
  */
 async function renderPuzzle(game, shapes) {
     let tile = initialTileSize;

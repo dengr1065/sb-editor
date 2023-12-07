@@ -1,4 +1,4 @@
-const { createCanvas } = require("canvas");
+const { createCanvas } = require("@napi-rs/canvas");
 const { MessageAttachment } = require("discord.js");
 const { trustedRoles, disabledCommands } = require("../../config.json");
 const { handleInstruction } = require("../instruction_viewer");

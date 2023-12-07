@@ -1,4 +1,4 @@
-const { createCanvas } = require("canvas");
+const { createCanvas } = require("@napi-rs/canvas");
 const {
     arrayQuadrantIndexToOffset,
     enumColorsToHexCode,
@@ -10,7 +10,7 @@ const quadrantSize = 10;
 const quadrantHalfSize = quadrantSize / 2;
 
 /**
- * @param {import("canvas").CanvasRenderingContext2D} ctx
+ * @param {import("@napi-rs/canvas").SKRSContext2D} ctx
  * @param {number} x
  * @param {number} y
  * @param {number} r
@@ -30,7 +30,7 @@ function radians(degrees) {
 }
 
 /**
- * @param {import("canvas").NodeCanvasRenderingContext2D} ctx
+ * @param {import("@napi-rs/canvas").SKRSContext2D} ctx
  * @param {string} message
  */
 function renderWarning(ctx, message) {

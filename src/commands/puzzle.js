@@ -115,7 +115,7 @@ async function execute(msg) {
         embed.addField("Avg. time", data.averageTime, true);
     }
 
-    /** @type {{[key: string]: import("canvas").Canvas}} */
+    /** @type {{[key: string]: import("@napi-rs/canvas").Canvas}} */
     const shapesCache = {};
     shapesCache[key] = renderShape(key, 64);
 
