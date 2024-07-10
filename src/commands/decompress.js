@@ -1,5 +1,4 @@
 const { MessageAttachment } = require("discord.js");
-const { default: fetch } = require("node-fetch");
 const { decompress } = require("../bin_file");
 
 /**

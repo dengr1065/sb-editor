@@ -114,10 +114,10 @@ async function execute(msg) {
     const embed = new MessageEmbed();
     embed.setTitle("Search results");
     embed.setDescription(description);
-    embed.setFooter(
-        msg.member.displayName + makeFooter(options),
-        msg.author.displayAvatarURL({ size: 64 })
-    );
+    embed.setFooter({
+        text: msg.member.displayName + makeFooter(options),
+        iconURL: msg.author.displayAvatarURL({ size: 64 })
+    });
 
     for (const result of results.slice(0, 5)) {
         const { title, value } = formatMeta(result);

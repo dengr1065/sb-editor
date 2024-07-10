@@ -91,10 +91,10 @@ async function execute(msg) {
         name: data.description
     });
     embed.setTitle(`${data.title} (${data.size})`);
-    embed.setFooter(
-        `${msg.member.displayName} • Key: ${key}`,
-        msg.author.displayAvatarURL({ size: 64 })
-    );
+    embed.setFooter({
+        text: `${msg.member.displayName} • Key: ${key}`,
+        iconURL: msg.author.displayAvatarURL({ size: 64 })
+    });
 
     // Display allowed buildings and reports (if any)
     const { list: reports } = await puzzleReports(key);

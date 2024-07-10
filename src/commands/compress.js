@@ -1,5 +1,4 @@
 const { MessageAttachment } = require("discord.js");
-const { default: fetch, FetchError } = require("node-fetch");
 const { compress } = require("../bin_file");
 
 /**
@@ -31,7 +30,7 @@ async function execute(msg) {
             files: [new MessageAttachment(result, sourceName + ".bin")]
         });
     } catch (err) {
-        if (err instanceof FetchError) {
+        if (err instanceof SyntaxError) {
             await msg.reply("That doesn't look like a valid JSON file... 🤔");
             return;
         }

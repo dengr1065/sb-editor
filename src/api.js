@@ -1,4 +1,3 @@
-const { default: fetch } = require("node-fetch");
 const { apiToken } = require("../config.json");
 
 const urlBase = "https://api.shapez.io/v1/";

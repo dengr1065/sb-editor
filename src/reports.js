@@ -1,5 +1,3 @@
-const { default: fetch } = require("node-fetch");
-
 /**
  * @typedef {object} PuzzleReport
  * @property {string} shortKey
