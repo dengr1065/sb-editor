@@ -21,7 +21,6 @@ compiler may be required._
 -   `sbe:puzzle <key>`: Display a puzzle using the short key.
 -   `sbe:reports <key/username>`: View reports for a puzzle or by username.
 -   `sbe:puzzlesearch [search terms]`: Search the puzzle collection.
--   `sbe:msg [message]`: Send a message from messages/ directory by its' name.
 -   `sbe:xban <reason>`: Ban a user in all servers where you have Ban Members permission.
 
 ## Configuration
@@ -29,8 +28,7 @@ compiler may be required._
 -   `token`: Discord bot token, required to login.
 -   `apiToken`: Token for shapez.io API, required to access puzzles.
 -   `puzzleWatchlist`: List of channel IDs to automatically run sbe:puzzle in.
--   `trustedRoles`: List of role IDs permitted to use instruction viewer and
-    quick messages.
+-   `trustedRoles`: List of role IDs permitted to use instruction viewer.
 -   `antiSpamEnabled`: Enable or disable simple automated spam detection.
 -   `upvoteThreshold`: Amount of emoji required to pin a message. Set to 0
     in order to disable pins.
