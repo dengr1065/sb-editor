@@ -32,5 +32,8 @@
             "sbe:reports",
             "sbe:viewer"
         ]
+    },
+    "viewerChannelAllowlist": {
+        "706121159405731910": ["706391717208784907"]
     }
 }

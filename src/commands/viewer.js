@@ -1,6 +1,10 @@
 const { createCanvas } = require("@napi-rs/canvas");
-const { MessageAttachment } = require("discord.js");
-const { trustedRoles, disabledCommands } = require("../../config.json");
+const { MessageAttachment, Permissions } = require("discord.js");
+const {
+    trustedRoles,
+    disabledCommands,
+    viewerChannelAllowlist
+} = require("../../config.json");
 const { handleInstruction } = require("../instruction_viewer");
 const { renderShape } = require("../viewer/viewer");
 const { enumLevelsToShape } = require("../viewer/enums");
@@ -86,6 +90,37 @@ function renderShapes(shapes, shapeSize = 56) {
 }
 
 /**
+ * Checks if the message is allowed to trigger the instruction viewer.
+ * @param {import("discord.js").Message} msg
+ */
+function isViewerAllowed(msg) {
+    const member = msg.member;
+
+    // Users who can manage messages can always trigger the viewer
+    if (member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+        return true;
+    }
+
+    // Roles can be explicitly allowed to use instruction viewer
+    const callerRoles = msg.member.roles.cache;
+    for (const [, role] of callerRoles) {
+        if (trustedRoles.includes(role.id)) {
+            return true;
+        }
+    }
+
+    // Check per-server allowlisted channels, where the viewer can be
+    // used by anyone.
+    const guildChannelAllowlist = viewerChannelAllowlist[msg.guildId];
+    if (!Array.isArray(guildChannelAllowlist)) {
+        // No configuration for this server, anyone can use the viewer
+        return true;
+    }
+
+    return guildChannelAllowlist.includes(msg.channelId);
+}
+
+/**
  * @param {import("discord.js").Message} msg
  */
 async function execute(msg) {
@@ -93,10 +128,8 @@ async function execute(msg) {
         throw new Error("You are not supposed to directly call this command");
     }
 
-    const callerRoles = msg.member.roles.cache;
-    if (!callerRoles.some((role) => trustedRoles.includes(role.id))) {
-        // Ignore users who cannot use the viewer
-        return;
+    if (!isViewerAllowed(msg)) {
+        return false;
     }
 
     const shapes = extractShapes(msg.content).slice(0, 64);
