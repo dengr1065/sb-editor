@@ -1,6 +1,6 @@
 {
     "name": "sb-editor",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "An extension to ShapeBot for advanced functionality.",
     "main": "src/index.js",
     "repository": {
@@ -10,6 +10,9 @@
     "author": "dengr1065",
     "license": "GPL-3.0-or-later",
     "private": true,
+    "scripts": {
+        "start": "node ."
+    },
     "dependencies": {
         "@napi-rs/canvas": "^0.1.44",
         "axios": "^0.27.2",
