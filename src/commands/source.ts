@@ -38,7 +38,7 @@ const commonFlags = [
     "--smart-case"
 ];
 
-const sourceTypes = ["js", "ts", "jsx", "tsx", "sass"];
+const sourceTypes = ["js", "ts", "sass"];
 for (const sourceType of sourceTypes) {
     commonFlags.push("--type", sourceType);
 }
@@ -59,7 +59,7 @@ function getBlame(gitBinary: string, repoDir: string, match: SourceMatch): Blame
 
     return {
         summary: summary ?? "Error",
-        date: new Date(Number(timestamp) * 1000 ?? 0)
+        date: new Date(Number(timestamp) * 1000)
     };
 }
 
