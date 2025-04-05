@@ -38,7 +38,7 @@ const commonFlags = [
     "--smart-case"
 ];
 
-const sourceTypes = ["js", "sass"];
+const sourceTypes = ["js", "ts", "jsx", "tsx", "sass"];
 for (const sourceType of sourceTypes) {
     commonFlags.push("--type", sourceType);
 }
