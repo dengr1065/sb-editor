@@ -42,6 +42,7 @@ export default botConfig;
 const version: string = JSON.parse(await readFile("./package.json", "utf-8")).version;
 const accentColor = Colors.DarkVividPink;
 const repoURL = "https://github.com/dengr1065/sb-editor";
-const shapezFileBaseURL = "https://github.com/tobspr-games/shapez.io/blob/master/";
+const shapezFileBaseURL =
+    "https://github.com/tobspr-games/shapez-community-edition/blob/master/";
 
-export { version, accentColor, repoURL, shapezFileBaseURL };
+export { accentColor, repoURL, shapezFileBaseURL, version };
