@@ -1,6 +1,6 @@
-const { MessageEmbed } = require("discord.js");
-const { userReports, puzzleReports } = require("../reports");
-const { fromShortKey } = require("../viewer/shape");
+import { MessageEmbed } from "discord.js";
+import { puzzleReports, userReports } from "../reports.js";
+import { fromShortKey } from "../viewer/shape.js";
 
 function formatPuzzlesArray(array) {
     const lines = array.slice(0, 4).map((line) => `\`${line}\``);
@@ -64,7 +64,7 @@ async function execute(msg) {
     });
 }
 
-module.exports = {
+export default {
     name: "sbe:reports",
     execute
 };

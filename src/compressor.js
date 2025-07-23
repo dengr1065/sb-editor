@@ -103,7 +103,7 @@ function indexMapToArray(hashMap) {
 /**
  * @param {object} obj
  */
-function compressObject(obj) {
+export function compressObject(obj) {
     const keys = new Map();
     const values = new Map();
     const data = compressObjectInternal(obj, keys, values);
@@ -149,7 +149,7 @@ function decompressObjectInternal(obj, keys = [], values = []) {
 /**
  * @param {object} obj
  */
-function decompressObject(obj) {
+export function decompressObject(obj) {
     if (obj.keys && obj.values && obj.data) {
         const keys = obj.keys;
         const values = obj.values;
@@ -158,5 +158,3 @@ function decompressObject(obj) {
     }
     return obj;
 }
-
-module.exports = { compressObject, decompressObject };

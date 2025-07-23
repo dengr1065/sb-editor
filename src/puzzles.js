@@ -1,8 +1,8 @@
-const { loadImage, createCanvas, Image } = require("@napi-rs/canvas");
-const { readFileSync } = require("fs");
-const { request } = require("./api");
-const { fromShortKey } = require("./viewer/shape");
-const { renderShape } = require("./viewer/viewer");
+import { createCanvas, Image, loadImage } from "@napi-rs/canvas";
+import { readFileSync } from "fs";
+import { request } from "./api.js";
+import { fromShortKey } from "./viewer/shape.js";
+import { renderShape } from "./viewer/viewer.js";
 
 const imageSizeLimit = 560;
 const initialTileSize = 64;
@@ -39,7 +39,7 @@ function makeGrid(size) {
  * @param {import("./typings").PuzzleGameData} game
  * @param {{ [key: string]: import("@napi-rs/canvas").Canvas }} shapes
  */
-async function renderPuzzle(game, shapes) {
+export async function renderPuzzle(game, shapes) {
     let tile = initialTileSize;
     const { w, h } = game.bounds;
     let imgWidth = w * tile;
@@ -148,14 +148,14 @@ async function renderPuzzle(game, shapes) {
 /**
  * @param {number} time
  */
-function formatPuzzleTime(time) {
+export function formatPuzzleTime(time) {
     let seconds = Math.round(time % 60);
     let minutes = Math.floor(time / 60);
 
     return `${minutes ? `${minutes}m ` : ""}${seconds}s`;
 }
 
-function difficultyFromValue(difficulty) {
+export function difficultyFromValue(difficulty) {
     if (difficulty === null) {
         return undefined;
     }
@@ -167,7 +167,7 @@ function difficultyFromValue(difficulty) {
     return difficulty <= 0.6 ? "medium" : "hard";
 }
 
-async function fetchPuzzle(key) {
+export async function fetchPuzzle(key) {
     fromShortKey(key); // Throws if the key is not valid
 
     /** @type {import("./typings").PuzzleData} */
@@ -179,7 +179,7 @@ async function fetchPuzzle(key) {
  * Search the puzzle collection with specified options.
  * @param {{ searchTerm: string, difficulty: string, duration: string }} options
  */
-async function searchPuzzles(options) {
+export async function searchPuzzles(options) {
     options.includeCompleted = true;
 
     /** @type {import("./typings").PuzzleMetaData[]} */
@@ -189,11 +189,3 @@ async function searchPuzzles(options) {
     });
     return results;
 }
-
-module.exports = {
-    renderPuzzle,
-    formatPuzzleTime,
-    difficultyFromValue,
-    fetchPuzzle,
-    searchPuzzles
-};

@@ -1,10 +1,10 @@
-const { apiToken } = require("../config.json");
+import { config, VERSION } from "./config.ts";
 
 const urlBase = "https://api.shapez.io/v1/";
 let ratelimitRemaining = 120;
 let ratelimitReset = Date.now();
 
-async function request(endpoint, options = {}) {
+export async function request(endpoint, options = {}) {
     if (ratelimitRemaining == 0 && Date.now() < ratelimitReset) {
         throw new Error("The bot is rate-limited.");
     }
@@ -12,10 +12,9 @@ async function request(endpoint, options = {}) {
     const response = await fetch(urlBase + endpoint, {
         ...options,
         headers: {
-            "user-agent":
-                "ShapeBotEditor/" + require("../package.json").version,
+            "user-agent": "ShapeBotEditor/" + VERSION,
             "x-api-key": "d5c54aaa491f200709afff082c153ef2",
-            "x-token": apiToken,
+            "x-token": config.apiToken,
             ...(options.body ? { "content-type": "application/json" } : {}),
             ...(options.headers || {})
         },
@@ -40,5 +39,3 @@ async function request(endpoint, options = {}) {
 
     return json;
 }
-
-module.exports = { request };

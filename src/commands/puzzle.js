@@ -1,14 +1,14 @@
-const { MessageEmbed, MessageAttachment } = require("discord.js");
-const { layerRegex } = require("../viewer/shape");
-const { puzzleWatchlist } = require("../../config.json");
-const { renderShape } = require("../viewer/viewer");
-const { puzzleReports } = require("../reports");
-const {
-    fetchPuzzle,
-    renderPuzzle,
+import { MessageAttachment, MessageEmbed } from "discord.js";
+import { config } from "../config.ts";
+import {
     difficultyFromValue,
-    formatPuzzleTime
-} = require("../puzzles");
+    fetchPuzzle,
+    formatPuzzleTime,
+    renderPuzzle
+} from "../puzzles.js";
+import { puzzleReports } from "../reports.js";
+import { layerRegex } from "../viewer/shape.js";
+import { renderShape } from "../viewer/viewer.js";
 
 const buildingToEmoji = {
     belt: "864892674540830722",
@@ -144,7 +144,7 @@ async function execute(msg) {
  */
 async function watcher(msg) {
     if (msg.author.bot) return;
-    const isWatched = puzzleWatchlist.includes(msg.channel.id);
+    const isWatched = config.puzzleWatchlist.includes(msg.channel.id);
     const isThread = msg.channel.type == "GUILD_PUBLIC_THREAD";
 
     if (!isWatched && !isThread) return;
@@ -158,7 +158,7 @@ async function watcher(msg) {
     }
 }
 
-module.exports = {
+export default {
     name: "sbe:puzzle",
     execute,
     load: (client) => {

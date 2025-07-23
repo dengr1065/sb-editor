@@ -1,5 +1,5 @@
-const { MessageAttachment } = require("discord.js");
-const { compress } = require("../bin_file");
+import { MessageAttachment } from "discord.js";
+import { compress } from "../bin_file.js";
 
 /**
  * @param {import("discord.js").Message} msg
@@ -38,7 +38,7 @@ async function execute(msg) {
     }
 }
 
-module.exports = {
+export default {
     name: "sbe:compress",
     execute
 };

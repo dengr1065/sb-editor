@@ -1,15 +1,15 @@
-const {
-    enumShortcodeToSubShape,
+import {
+    enumColorToShortcode,
     enumShortcodeToColor,
-    enumSubShapeToShortcode,
-    enumColorToShortcode
-} = require("./enums");
+    enumShortcodeToSubShape,
+    enumSubShapeToShortcode
+} from "./enums.js";
 
 const maxLayer = 4;
 
 const possibleShapesString = Object.keys(enumShortcodeToSubShape).join("");
 const possibleColorsString = Object.keys(enumShortcodeToColor).join("");
-const layerRegex = new RegExp(
+export const layerRegex = new RegExp(
     "([" + possibleShapesString + "][" + possibleColorsString + "]|-{2}){4}"
 );
 
@@ -17,7 +17,7 @@ const layerRegex = new RegExp(
  * Generates the definition from the given short key
  * @returns {{ subShape: string, color: string }[][]}
  */
-function fromShortKey(key) {
+export function fromShortKey(key) {
     const sourceLayers = key.split(":");
     if (sourceLayers.length > maxLayer) {
         throw new Error("excess layers");
@@ -62,7 +62,7 @@ function fromShortKey(key) {
  * Serializes the shape definition back to a string
  * @param {{ subShape: string, color: string }[][]} shape
  */
-function toShortKey(shape) {
+export function toShortKey(shape) {
     let key = "";
     for (let layerIndex = 0; layerIndex < shape.length; ++layerIndex) {
         const layer = shape[layerIndex];
@@ -86,7 +86,7 @@ function toShortKey(shape) {
     return key;
 }
 
-function filterQuads(shape, indexes) {
+export function filterQuads(shape, indexes) {
     const newShape = [];
     for (const layer of shape) {
         const newLayer = [null, null, null, null];
@@ -123,7 +123,7 @@ function getRandomColor() {
     ];
 }
 
-function randomShape() {
+export function randomShape() {
     let layers = getRandomInt(maxLayer);
     let code = "";
 
@@ -151,11 +151,3 @@ function randomShape() {
     code = code.replace(/:+$/, "");
     return fromShortKey(code);
 }
-
-module.exports = {
-    fromShortKey,
-    toShortKey,
-    filterQuads,
-    randomShape,
-    layerRegex
-};

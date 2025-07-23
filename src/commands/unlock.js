@@ -149,7 +149,7 @@ function findReward(keywords) {
  */
 async function execute(msg) {
     const keywords = msg.cleanContent
-        .slice(module.exports.name.length)
+        .slice("sbe:unlock".length)
         .trim()
         .split(/\s+/g);
     const result = findReward(keywords);
@@ -170,7 +170,7 @@ async function execute(msg) {
     await msg.reply(message);
 }
 
-module.exports = {
+export default {
     name: "sbe:unlock",
     execute
 };

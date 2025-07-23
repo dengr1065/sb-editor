@@ -1,5 +1,5 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-const { getMod } = require("../modio");
+import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import { getMod } from "../modio.js";
 
 /**
  * @param {import("discord.js").Message} msg
@@ -78,7 +78,7 @@ async function execute(msg) {
     });
 }
 
-module.exports = {
+export default {
     name: "sbe:mods",
     execute
 };

@@ -58,7 +58,7 @@ function categorize(reports) {
     return result;
 }
 
-async function userReports(username) {
+export async function userReports(username) {
     await fetchReports();
     const result = reportsCache.filter((r) => r.reporterName == username);
 
@@ -68,7 +68,7 @@ async function userReports(username) {
     };
 }
 
-async function puzzleReports(shortKey) {
+export async function puzzleReports(shortKey) {
     await fetchReports();
     const result = reportsCache.filter((r) => r.shortKey == shortKey);
 
@@ -77,5 +77,3 @@ async function puzzleReports(shortKey) {
         list: result.map((r) => r.reporterName)
     };
 }
-
-module.exports = { userReports, puzzleReports };

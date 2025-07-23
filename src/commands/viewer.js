@@ -1,13 +1,9 @@
-const { createCanvas } = require("@napi-rs/canvas");
-const { MessageAttachment, Permissions } = require("discord.js");
-const {
-    trustedRoles,
-    disabledCommands,
-    viewerChannelAllowlist
-} = require("../../config.json");
-const { handleInstruction } = require("../instruction_viewer");
-const { renderShape } = require("../viewer/viewer");
-const { enumLevelsToShape } = require("../viewer/enums");
+import { createCanvas } from "@napi-rs/canvas";
+import { MessageAttachment, Permissions } from "discord.js";
+import { config } from "../config.ts";
+import { handleInstruction } from "../instruction_viewer.js";
+import { enumLevelsToShape } from "../viewer/enums.js";
+import { renderShape } from "../viewer/viewer.js";
 
 /**
  * Extracts shape definitions and modifiers from messages.
@@ -104,14 +100,14 @@ function isViewerAllowed(msg) {
     // Roles can be explicitly allowed to use instruction viewer
     const callerRoles = msg.member.roles.cache;
     for (const [, role] of callerRoles) {
-        if (trustedRoles.includes(role.id)) {
+        if (config.trustedRoles.includes(role.id)) {
             return true;
         }
     }
 
     // Check per-server allowlisted channels, where the viewer can be
     // used by anyone.
-    const guildChannelAllowlist = viewerChannelAllowlist[msg.guildId];
+    const guildChannelAllowlist = config.viewerChannelAllowlist[msg.guildId];
     if (!Array.isArray(guildChannelAllowlist)) {
         // No configuration for this server, anyone can use the viewer
         return true;
@@ -163,7 +159,7 @@ async function watcher(msg) {
     if (msg.author.bot) return;
     if (!msg.content.includes("{")) return;
 
-    if (disabledCommands[msg.guildId]?.includes("sbe:viewer")) {
+    if (config.disabledCommands[msg.guildId]?.includes("sbe:viewer")) {
         return;
     }
 
@@ -175,7 +171,7 @@ async function watcher(msg) {
     }
 }
 
-module.exports = {
+export default {
     name: "sbe:viewer",
     execute,
     load: (client) => {

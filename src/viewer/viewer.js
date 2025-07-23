@@ -1,10 +1,10 @@
-const { createCanvas } = require("@napi-rs/canvas");
-const {
+import { createCanvas } from "@napi-rs/canvas";
+import {
     arrayQuadrantIndexToOffset,
     enumColorsToHexCode,
     enumSubShape
-} = require("./enums");
-const { fromShortKey } = require("./shape");
+} from "./enums.js";
+import { fromShortKey } from "./shape.js";
 
 const quadrantSize = 10;
 const quadrantHalfSize = quadrantSize / 2;
@@ -70,7 +70,7 @@ function renderWarning(ctx, message) {
  * @param {string} code
  * @param {number} s
  */
-function renderShape(code, s) {
+export function renderShape(code, s) {
     const canvas = createCanvas(s, s);
     const context = canvas.getContext("2d");
     let layers;
@@ -196,5 +196,3 @@ function renderShape(code, s) {
 
     return canvas;
 }
-
-module.exports = { renderShape };

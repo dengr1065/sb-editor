@@ -1,10 +1,6 @@
-const { MessageAttachment } = require("discord.js");
-const {
-    trustedRoles,
-    shapez2ViewerPath,
-    disabledCommands
-} = require("../../config.json");
-const { spawnSync } = require("child_process");
+import { spawnSync } from "child_process";
+import { MessageAttachment } from "discord.js";
+import { config } from "../config.ts";
 
 /**
  * Executes the external Shapez 2 viewer and returns both
@@ -16,7 +12,7 @@ const { spawnSync } = require("child_process");
 function executeViewer(instructions, shapeSize) {
     const proc = spawnSync("python3", [".", shapeSize.toString()], {
         shell: true,
-        cwd: shapez2ViewerPath,
+        cwd: config.shapez2ViewerPath,
         input: JSON.stringify(instructions)
     });
 
@@ -84,7 +80,7 @@ async function execute(msg) {
     }
 
     const callerRoles = msg.member.roles.cache;
-    if (!callerRoles.some((role) => trustedRoles.includes(role.id))) {
+    if (!callerRoles.some((role) => config.trustedRoles.includes(role.id))) {
         // Ignore users who cannot use the viewer
         return;
     }
@@ -120,7 +116,7 @@ async function watcher(msg) {
     if (msg.author.bot) return;
     if (!msg.content.includes("{")) return;
 
-    if (disabledCommands[msg.guildId]?.includes("sbe:s2viewer")) {
+    if (config.disabledCommands[msg.guildId]?.includes("sbe:s2viewer")) {
         return;
     }
 
@@ -132,7 +128,7 @@ async function watcher(msg) {
     }
 }
 
-module.exports = {
+export default {
     name: "sbe:s2viewer",
     execute,
     load: (client) => {

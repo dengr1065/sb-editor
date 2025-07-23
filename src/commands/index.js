@@ -1,3 +1,15 @@
+import antispam from "./antispam.js";
+import compress from "./compress.js";
+import decompress from "./decompress.js";
+import mods from "./mods.js";
+import puzzle from "./puzzle.js";
+import puzzlesearch from "./puzzlesearch.js";
+import reports from "./reports.js";
+import s2viewer from "./s2viewer.js";
+import unlock from "./unlock.js";
+import upvotepin from "./upvotepin.js";
+import viewer from "./viewer.js";
+
 /**
  * @typedef {Object} Command
  * @property {string} name
@@ -7,17 +19,17 @@
 
 /** @type {Command[]} */
 const commands = [
-    require("./antispam"),
-    require("./compress"),
-    require("./decompress"),
-    require("./mods"),
-    require("./puzzle"),
-    require("./puzzlesearch"),
-    require("./reports"),
-    require("./s2viewer"),
-    require("./unlock"),
-    require("./upvotepin"),
-    require("./viewer")
+    antispam,
+    compress,
+    decompress,
+    mods,
+    puzzle,
+    puzzlesearch,
+    reports,
+    s2viewer,
+    unlock,
+    upvotepin,
+    viewer
 ];
 
-module.exports = commands;
+export default commands;

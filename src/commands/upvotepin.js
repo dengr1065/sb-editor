@@ -1,8 +1,4 @@
-const {
-    upvoteThreshold,
-    upvoteEmojis,
-    upvoteWatchlist
-} = require("../../config.json");
+import { config } from "../config.ts";
 
 /**
  * @param {import("discord.js").Message} msg
@@ -20,12 +16,12 @@ async function execute(msg) {
 async function watcher(preact) {
     // trust me on these partials
     const code = preact.emoji.id ?? preact.emoji.name;
-    if (!upvoteEmojis.includes(code)) return;
-    if (!upvoteWatchlist.includes(preact.message.channel.id)) return;
+    if (!config.upvoteEmojis.includes(code)) return;
+    if (!config.upvoteWatchlist.includes(preact.message.channel.id)) return;
 
     try {
         const react = await preact.fetch();
-        if (react.count < upvoteThreshold) return;
+        if (react.count < config.upvoteThreshold) return;
 
         const message = await react.message.fetch();
 
@@ -43,11 +39,11 @@ async function watcher(preact) {
     }
 }
 
-module.exports = {
+export default {
     name: "sbe:upvotepin",
     execute,
     load: (client) => {
-        if (upvoteThreshold > 0) {
+        if (config.upvoteThreshold > 0) {
             client.on("messageReactionAdd", watcher);
         }
     }

@@ -1,9 +1,6 @@
-const { crc32 } = require("crc");
-const { decompressObject, compressObject } = require("./compressor");
-const {
-    decompressFromEncodedURIComponent,
-    compressToEncodedURIComponent
-} = require("lz-string");
+import crc32 from "crc/crc32";
+import lzs from "lz-string";
+import { compressObject, decompressObject } from "./compressor.js";
 
 const checksumPrefix = "crc32".padEnd(32, "-");
 const binSalt = "Ec'])@^+*9zMevK3uMV4432x9%iK'=";
@@ -20,7 +17,7 @@ const marker = Buffer.of(0x01);
  * @param {Buffer} file The .bin file to decompress
  * @returns {DecompressResult}
  */
-function decompress(file) {
+export function decompress(file) {
     const warnings = [];
 
     try {
@@ -29,7 +26,7 @@ function decompress(file) {
         }
 
         const encoded = file.toString("utf-8", 1);
-        const decoded = decompressFromEncodedURIComponent(encoded);
+        const decoded = lzs.decompressFromEncodedURIComponent(encoded);
         if (!decoded) {
             // either null or empty string
             throw new Error("Corrupted .bin file (failed to decompress)");
@@ -59,12 +56,12 @@ function decompress(file) {
  * Compress to a .bin file
  * @param {object} data Data to compress
  */
-function compress(data) {
+export function compress(data) {
     const stringified = JSON.stringify(compressObject(data));
     const checksum = computeChecksum(stringified);
 
     const decoded = checksumPrefix + checksum + stringified;
-    const encoded = compressToEncodedURIComponent(decoded);
+    const encoded = lzs.compressToEncodedURIComponent(decoded);
     return Buffer.concat([marker, Buffer.from(encoded, "utf-8")]);
 }
 
@@ -78,5 +75,3 @@ function computeChecksum(compressed) {
         .toString(16)
         .padStart(8, "0");
 }
-
-module.exports = { decompress, compress };

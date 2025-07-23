@@ -1,5 +1,5 @@
 /** @enum {string} */
-const enumSubShape = {
+export const enumSubShape = {
     rect: "rect",
     circle: "circle",
     star: "star",
@@ -7,7 +7,7 @@ const enumSubShape = {
 };
 
 /** @enum {string} */
-const enumSubShapeToShortcode = {
+export const enumSubShapeToShortcode = {
     [enumSubShape.rect]: "R",
     [enumSubShape.circle]: "C",
     [enumSubShape.star]: "S",
@@ -15,12 +15,12 @@ const enumSubShapeToShortcode = {
 };
 
 /** @enum {enumSubShape} */
-const enumShortcodeToSubShape = {};
+export const enumShortcodeToSubShape = {};
 for (const key in enumSubShapeToShortcode) {
     enumShortcodeToSubShape[enumSubShapeToShortcode[key]] = key;
 }
 
-const arrayQuadrantIndexToOffset = [
+export const arrayQuadrantIndexToOffset = [
     { x: 1, y: -1 }, // tr
     { x: 1, y: 1 }, // br
     { x: -1, y: 1 }, // bl
@@ -28,7 +28,7 @@ const arrayQuadrantIndexToOffset = [
 ];
 
 /** @enum {string} */
-const enumColors = {
+export const enumColors = {
     red: "red",
     green: "green",
     blue: "blue",
@@ -42,7 +42,7 @@ const enumColors = {
 };
 
 /** @enum {string} */
-const enumColorToShortcode = {
+export const enumColorToShortcode = {
     [enumColors.red]: "r",
     [enumColors.green]: "g",
     [enumColors.blue]: "b",
@@ -56,7 +56,7 @@ const enumColorToShortcode = {
 };
 
 /** @enum {string} */
-const enumColorsToHexCode = {
+export const enumColorsToHexCode = {
     [enumColors.red]: "#ff666a",
     [enumColors.green]: "#78ff66",
     [enumColors.blue]: "#66a7ff",
@@ -77,13 +77,13 @@ const enumColorsToHexCode = {
 };
 
 /** @enum {enumColors} */
-const enumShortcodeToColor = {};
+export const enumShortcodeToColor = {};
 for (const key in enumColorToShortcode) {
     enumShortcodeToColor[enumColorToShortcode[key]] = key;
 }
 
 /** @enum {string} */
-const enumLevelsToShape = {
+export const enumLevelsToShape = {
     1: "CuCuCuCu",
     2: "----CuCu",
     3: "RuRuRuRu",
@@ -110,16 +110,4 @@ const enumLevelsToShape = {
     24: "CcRcCcRc:RwCwRwCw:Sr--Sw--:CyCyCyCy",
     25: "Rg--Rg--:CwRwCwRw:--Rg--Rg",
     26: "CbCuCbCu:Sr------:--CrSrCr:CwCwCwCw"
-};
-
-module.exports = {
-    enumSubShape,
-    enumSubShapeToShortcode,
-    enumShortcodeToSubShape,
-    arrayQuadrantIndexToOffset,
-    enumColors,
-    enumColorToShortcode,
-    enumColorsToHexCode,
-    enumShortcodeToColor,
-    enumLevelsToShape
 };

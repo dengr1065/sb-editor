@@ -1,4 +1,4 @@
-const axios = require("axios").default;
+import axios from "axios";
 
 const api = axios.create({
     baseURL: "https://api.mod.io/v1/games/@shapez",
@@ -129,7 +129,7 @@ class Mod {
  * Searches for a mod and returns wrapped instance.
  * @param {string} query
  */
-async function getMod(query) {
+export async function getMod(query) {
     const raw = await getRawMod(query);
     if (raw === undefined) {
         return;
@@ -137,5 +137,3 @@ async function getMod(query) {
 
     return new Mod(raw);
 }
-
-module.exports = { getMod };

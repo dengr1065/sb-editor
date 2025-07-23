@@ -1,4 +1,4 @@
-const { fromShortKey, toShortKey, filterQuads } = require("./viewer/shape");
+import { filterQuads, fromShortKey, toShortKey } from "./viewer/shape.js";
 
 const modifiers = {
     rot: doRot,
@@ -122,7 +122,7 @@ function doLayers(input) {
  * @param {string} instruction
  * @param {string[]} flags
  */
-function handleInstruction(shortKey, flags) {
+export function handleInstruction(shortKey, flags) {
     try {
         if (flags.length == 0) {
             return [shortKey];
@@ -140,5 +140,3 @@ function handleInstruction(shortKey, flags) {
         return [];
     }
 }
-
-module.exports = { handleInstruction };

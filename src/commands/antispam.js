@@ -1,4 +1,4 @@
-const { antiSpamEnabled } = require("../../config.json");
+import { config } from "../config.ts";
 
 const lastMessages = {};
 
@@ -71,11 +71,11 @@ async function watcher(msg) {
     lastMessages[id] = info;
 }
 
-module.exports = {
+export default {
     name: "sbe:antispam",
     execute,
     load: (client) => {
-        if (antiSpamEnabled) {
+        if (config.antiSpamEnabled) {
             client.on("messageCreate", watcher);
         }
     }

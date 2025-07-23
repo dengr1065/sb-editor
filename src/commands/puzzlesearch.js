@@ -1,9 +1,9 @@
-const { MessageEmbed } = require("discord.js");
-const {
-    searchPuzzles,
+import { MessageEmbed } from "discord.js";
+import {
     difficultyFromValue,
-    formatPuzzleTime
-} = require("../puzzles");
+    formatPuzzleTime,
+    searchPuzzles
+} from "../puzzles.js";
 
 const difficulties = ["any", "easy", "medium", "hard"];
 const durations = ["any", "short", "medium", "long"];
@@ -129,7 +129,7 @@ async function execute(msg) {
     });
 }
 
-module.exports = {
+export default {
     name: "sbe:puzzlesearch",
     execute
 };

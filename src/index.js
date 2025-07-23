@@ -1,7 +1,7 @@
-const { Client, Intents } = require("discord.js");
-const { token, disabledCommands } = require("../config.json");
+import { Client, Intents } from "discord.js";
+import { config } from "./config.ts";
 
-const commands = require("./commands");
+import commands from "./commands/index.js";
 
 const client = new Client({
     intents: [
@@ -38,12 +38,12 @@ async function loadCommands() {
  */
 function isCommandDisabled(guild, command) {
     const guildId = guild.id;
-    if (!Array.isArray(disabledCommands[guildId])) {
+    if (!Array.isArray(config.disabledCommands[guildId])) {
         // No commands specified for this guild
         return false;
     }
 
-    return disabledCommands[guildId].includes(command);
+    return config.disabledCommands[guildId].includes(command);
 }
 
 client.on("messageCreate", async (msg) => {
@@ -79,5 +79,5 @@ loadCommands().then((errors) => {
     }
 
     console.log("Initial load complete.");
-    client.login(token);
+    client.login(config.token);
 });
