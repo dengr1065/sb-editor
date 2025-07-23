@@ -5,7 +5,6 @@ import mods from "./mods.js";
 import puzzle from "./puzzle.js";
 import puzzlesearch from "./puzzlesearch.js";
 import reports from "./reports.js";
-import s2viewer from "./s2viewer.js";
 import unlock from "./unlock.js";
 import upvotepin from "./upvotepin.js";
 import viewer from "./viewer.js";
@@ -26,7 +25,6 @@ const commands = [
     puzzle,
     puzzlesearch,
     reports,
-    s2viewer,
     unlock,
     upvotepin,
     viewer

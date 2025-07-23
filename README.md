@@ -1,17 +1,18 @@
 # ShapeBot Editor
 
-This is a little bot to extend ShapeBot basic features (role management) with
-commands intended for the end user.
+This is a little bot providing useful commands for Discord servers themed around [shapez].
+
+[shapez]: https://github.com/tobspr-games/shapez-community-edition
 
 ## Setup
 
-Requirements: Node.js, Yarnpkg. _Depending on your operating system, a C/C++
+Requirements: Node.js 22.x or newer. _Depending on your operating system, a C/C++
 compiler may be required._
 
 -   Clone the repository.
--   Install dependencies by running `yarn`.
+-   Install dependencies by running `npm i`.
 -   Copy and adjust the configuration file (`config.json`).
--   Finally, run the bot: `node .`.
+-   Finally, run the bot: `npm start`.
 
 ## Features
 
@@ -21,7 +22,6 @@ compiler may be required._
 -   `sbe:puzzle <key>`: Display a puzzle using the short key.
 -   `sbe:reports <key/username>`: View reports for a puzzle or by username.
 -   `sbe:puzzlesearch [search terms]`: Search the puzzle collection.
--   `sbe:xban <reason>`: Ban a user in all servers where you have Ban Members permission.
 -   `sbe:unlock <keywords>`: Show the level required to unlock a building/feature.
 
 ## Configuration

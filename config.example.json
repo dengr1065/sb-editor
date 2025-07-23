@@ -20,9 +20,7 @@
     "upvoteThreshold": 5,
     "upvoteEmojis": ["776486324974649354"],
     "upvoteWatchlist": ["761128571984674816", "706391702067347456"],
-    "shapez2ViewerPath": "/path/to/viewer/repo",
     "disabledCommands": {
-        "706121159405731910": ["sbe:s2viewer"],
         "1000343719314198548": [
             "sbe:compress",
             "sbe:decompress",
