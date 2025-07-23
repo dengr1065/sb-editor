@@ -50,10 +50,5 @@ module.exports = {
         if (upvoteThreshold > 0) {
             client.on("messageReactionAdd", watcher);
         }
-    },
-    unload: (client) => {
-        if (upvoteThreshold > 0) {
-            client.off("messageReactionAdd", watcher);
-        }
     }
 };

@@ -78,10 +78,5 @@ module.exports = {
         if (antiSpamEnabled) {
             client.on("messageCreate", watcher);
         }
-    },
-    unload: (client) => {
-        if (antiSpamEnabled) {
-            client.off("messageCreate", watcher);
-        }
     }
 };

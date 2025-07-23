@@ -163,8 +163,5 @@ module.exports = {
     execute,
     load: (client) => {
         client.on("messageCreate", watcher);
-    },
-    unload: (client) => {
-        client.off("messageCreate", watcher);
     }
 };

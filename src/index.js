@@ -1,6 +1,7 @@
 const { Client, Intents } = require("discord.js");
-const { readdirSync } = require("fs");
 const { token, disabledCommands } = require("../config.json");
+
+const commands = require("./commands");
 
 const client = new Client({
     intents: [
@@ -14,56 +15,16 @@ const client = new Client({
     }
 });
 
-/**
- * @typedef {Object} Command
- * @property {string} name
- * @property {(msg: import("discord.js").Message) => Promise<void>} execute
- * @property {function} [load]
- * @property {function} [unload]
- */
-
-/** @type {Command[]} */
-const commands = [
-    {
-        name: "sbe:reload",
-        execute: async (msg) => {
-            const result = loadCommands();
-            if (result.length) {
-                const all = result.map((e) => `⏵ ${e}`).join("\n");
-                await msg.reply("Command errors:\n" + all);
-                return;
-            }
-
-            await msg.reply("✅ Commands successfully reloaded.");
-        }
-    }
-];
-
 async function loadCommands() {
-    for (const cmd of commands) {
-        if (cmd.unload) {
-            await cmd.unload(client);
-        }
-    }
-
-    commands.splice(1);
-    const files = readdirSync("./src/commands");
     const errors = [];
 
-    for (const file of files) {
-        const module = `./commands/${file.substr(0, file.length - 3)}`;
-        delete require.cache[require.resolve(module)];
-
+    for (const command of commands) {
         try {
-            /** @type {Command} */
-            const command = require(module);
-
             if (command.load) {
                 await command.load(client);
             }
-            commands.push(command);
         } catch (err) {
-            errors.push(file + ": " + err.message);
+            errors.push(command.name + ": " + err.message);
         }
     }
 
