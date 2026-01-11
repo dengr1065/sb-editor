@@ -33,9 +33,10 @@ export const enumColors = {
     green: "green",
     blue: "blue",
 
-    yellow: "yellow",
-    purple: "purple",
     cyan: "cyan",
+    magenta: "magenta",
+    purple: "purple",
+    yellow: "yellow",
 
     white: "white",
     uncolored: "uncolored"
@@ -47,9 +48,10 @@ export const enumColorToShortcode = {
     [enumColors.green]: "g",
     [enumColors.blue]: "b",
 
-    [enumColors.yellow]: "y",
-    [enumColors.purple]: "p",
     [enumColors.cyan]: "c",
+    [enumColors.magenta]: "m",
+    [enumColors.purple]: "p",
+    [enumColors.yellow]: "y",
 
     [enumColors.white]: "w",
     [enumColors.uncolored]: "u"
@@ -61,14 +63,15 @@ export const enumColorsToHexCode = {
     [enumColors.green]: "#78ff66",
     [enumColors.blue]: "#66a7ff",
 
-    // red + green
-    [enumColors.yellow]: "#fcf52a",
+    // green + blue
+    [enumColors.cyan]: "#87fff5",
 
     // red + blue
+    [enumColors.magenta]: "#f066f0",
     [enumColors.purple]: "#dd66ff",
 
-    // blue + green
-    [enumColors.cyan]: "#87fff5",
+    // red + green
+    [enumColors.yellow]: "#fcf52a",
 
     // blue + green + red
     [enumColors.white]: "#ffffff",
@@ -92,17 +95,17 @@ export const enumLevelsToShape = {
     6: "Cu------",
     7: "CrCrCrCr",
     8: "RbRb----",
-    9: "CpCpCpCp",
+    9: "CmCmCmCm",
     10: "ScScScSc",
     11: "CgScScCg",
     12: "CbCbCbRb:CwCwCwCw",
-    13: "RpRpRpRp:CwCwCwCw",
+    13: "RmRmRmRm:CwCwCwCw",
     14: "--Cg----:--Cr----",
     15: "SrSrSrSr:CyCyCyCy",
     16: "SrSrSrSr:CyCyCyCy:SwSwSwSw",
     17: "CbRbRbCb:CwCwCwCw:WbWbWbWb",
     18: "Sg----Sg:CgCgCgCg:--CyCy--",
-    19: "CpRpCp--:SwSwSwSw",
+    19: "CmRmCm--:SwSwSwSw",
     20: "RuCw--Cw:----Ru--",
     21: "CrCwCrCw:CwCrCwCr:CrCwCrCw:CwCrCwCr",
     22: "Cg----Cr:Cw----Cw:Sy------:Cy----Cy",
